@@ -14,13 +14,37 @@
 	add_action( 'admin_head-post-new.php', 'imageConfigDefaults_SetImageDefaultSettings' );
 	function imageConfigDefaults_SetImageDefaultSettings() {
 		$alignment = get_option( 'image_default_align' );
+		switch ($alignment) {
+			case "left":
+			case "right":
+			case "center":
+				break;
+			default:
+				$alignment = "none";
+				break;
+		}
+
 		$link = get_option( 'image_default_link_type' );
+		switch ($link) {
+			case "file":
+			case "attachment":
+				$link = "attachment";
+				break;
+			case "media":
+			case "media-file":
+				$link = "media";
+				break;
+			default:
+				$link = "none";
+				break;
+		}
 	?>
 		<script>
 		function imageConfigDefaults_setImageDefaultSettings(settings, name) {
 			if (name !== "core/image" || !settings.attributes) {
 				return settings;
 			}
+
 			settings.attributes.linkDestination.default = "<?php echo $link ?>";
 			settings.attributes.align.default = "<?php echo $alignment ?>";
 
