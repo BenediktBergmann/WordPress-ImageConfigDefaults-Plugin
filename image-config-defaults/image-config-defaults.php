@@ -31,6 +31,7 @@
 				$link = "attachment";
 				break;
 			case "media":
+			case "media file":
 			case "media-file":
 				$link = "media";
 				break;
