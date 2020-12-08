@@ -9,9 +9,7 @@ License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
-Auto Anchor is a WordPress plugin. It adds an HTML anchor to every Header-tag (h2-h6) and shows a small chain icon on the side when one is hovering over the anchor. The icon is also a link that contains a direkt link to the specific header.
-
-The style is inspired by the current Microsoft docs ([Example](https://docs.microsoft.com/en-us/power-platform/alm/overview-alm#what-is-alm))
+Image Config Default is a WordPress plugin. It adds default configuration to images when added to a blog post within gutenberg editor. It will load the configuration of the option page (image_default_align and image_default_link_type).
 
 == Disclaimer ==
 Use this Plugin at your own risk. The Author can not be held responsible for any damage or in any other way.
