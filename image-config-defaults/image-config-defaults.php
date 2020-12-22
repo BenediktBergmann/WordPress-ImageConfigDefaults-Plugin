@@ -3,7 +3,7 @@
  * Plugin Name: Image Config Defaults
  * Plugin URI:  https://github.com/BenediktBergmann/WordPress-ImageConfigDefaults-Plugin
  * Description: Adds default configuration to images when added to a blog post within gutenberg editor. It will load the configuration of the option page (image_default_align and image_default_link_type).
- * Version:     1.2.0
+ * Version:     1.1.0
  * Author:      Benedikt Bergmann
  * Author URI:  https://benediktbergmann.eu
  * Text Domain: Auto-Anchor 

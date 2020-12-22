@@ -1,6 +1,6 @@
 === Image Config Default ===
 Contributors: benediktbergmann
-Stable tag: 1.2.0
+Stable tag: 1.1.0
 Tags: image, config, default, gutenberg
 Requires at least: 5.4
 Tested up to: 5.6
