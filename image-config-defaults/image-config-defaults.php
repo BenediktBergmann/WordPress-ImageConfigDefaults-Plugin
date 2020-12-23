@@ -3,7 +3,7 @@
  * Plugin Name: Image Config Defaults
  * Plugin URI:  https://github.com/BenediktBergmann/WordPress-ImageConfigDefaults-Plugin
  * Description: Adds default configuration to images when added to a blog post within gutenberg editor. It will load the configuration of the option page (image_default_align and image_default_link_type).
- * Version:     1.1.0
+ * Version:     1.2.0
  * Author:      Benedikt Bergmann
  * Author URI:  https://benediktbergmann.eu
  * Text Domain: Auto-Anchor 
@@ -50,8 +50,6 @@
 				return settings;
 			}
 
-			debugger;
-
 			settings.attributes.linkDestination.default = "<?php echo $link ?>";
 			settings.attributes.align.default = "<?php echo $alignment ?>";
 
@@ -92,6 +90,8 @@
 
 	function imageConfigDefaults_register_settings() {
 		register_setting( 'imageConfigDefaults_plugin_options', 'imageConfigDefaults_plugin_options');
+		register_setting( 'imageConfigDefaults_plugin_options', 'image_default_align');
+		register_setting( 'imageConfigDefaults_plugin_options', 'image_default_link_type');
 		add_settings_section( 'default_settings', 'Image default settings', 'imageConfigDefaults_plugin_section_text', 'imageConfigDefaults_plugin' );
 	
 		add_settings_field( 'imageConfigDefaults_plugin_setting_align', 'image_default_align', 'imageConfigDefaults_plugin_setting_align', 'imageConfigDefaults_plugin', 'default_settings' );
@@ -110,20 +110,48 @@
 		$options = get_option( 'imageConfigDefaults_plugin_options' );
 		?>
 			<input id="imageConfigDefaults_plugin_setting_caption" name="imageConfigDefaults_plugin_options[caption]" type="text" value="<?php echo esc_attr( $options['caption'] ); ?>" />
-        <?php
+		<?php
 	}
 
 	function imageConfigDefaults_plugin_setting_align() {
 		$align = get_option( 'image_default_align' );
 		?>
-			<input id="imageConfigDefaults_plugin_setting_align" name="image_default_align" type="text" value="<?php echo esc_attr( $align ); ?>" />
+			<select name="image_default_align" id="imageConfigDefaults_plugin_setting_align">
+				<option value="none" <?php selected($align, "none"); ?>>None</option>
+				<option value="left" <?php selected($align, "left"); ?>>Left</option>	
+				<option value="right" <?php selected($align, "right"); ?>>Right</option>
+				<option value="center" <?php selected($align, "center"); ?>>Center</option>
+			</select>
         <?php
 	}
 
 	function imageConfigDefaults_plugin_setting_link_type() {
 		$linktype = get_option( 'image_default_link_type' );
 		?>
-			<input id="imageConfigDefaults_plugin_setting_link_type" name="image_default_link_type" type="text" value="<?php echo esc_attr( $linktype ); ?>" />
+			<select name="image_default_link_type" id="imageConfigDefaults_plugin_setting_link_type">
+				<option value="none" <?php selected($linktype, "none"); ?>>None</option>
+				<option value="media-file" <?php if ( $linktype == "media" || $linktype == "media file" || $linktype == "media-file" ) echo 'selected="selected"'; ?>>Media file</option>	
+				<option value="attachment" <?php if ( $linktype == "attachment" || $linktype == "file") echo 'selected="selected"'; ?>>Attachment</option>
+			</select>
         <?php
+	}
+
+	/* Add settings link to plugin page */
+	add_filter( 'plugin_action_links_image-config-defaults/image-config-defaults.php', 'imageConfigDefaults_settings_link' );
+	function imageConfigDefaults_settings_link( $links ) {
+		// Build and escape the URL.
+		$url = esc_url( add_query_arg(
+			'page',
+			'imageConfigDefaults',
+			get_admin_url() . 'options-general.php'
+		) );
+		// Create the link.
+		$settings_link = "<a href='$url'>" . __( 'Settings' ) . '</a>';
+		// Adds the link to the end of the array.
+		array_push(
+			$links,
+			$settings_link
+		);
+		return $links;
 	}
 ?>
