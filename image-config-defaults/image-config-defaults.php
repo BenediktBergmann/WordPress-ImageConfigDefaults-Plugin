@@ -6,7 +6,7 @@
  * Version:     1.2.3
  * Author:      Benedikt Bergmann
  * Author URI:  https://benediktbergmann.eu
- * Text Domain: Auto-Anchor 
+ * Text Domain: Image-Defaults
  * License:     GPL3
  */
 
